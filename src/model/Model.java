@@ -1,32 +1,42 @@
 package model;
 
+import javax.jms.JMSException;
+
+import controller.Producer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class Model 
 {
 	
-	private static boolean playerWhiteTurn=true;
+	//private static boolean playerWhiteTurn=true;
 	private static int movesNumber=0;
 	private Circle circle = new Circle(27);
 	Message message = new Message();
+	boolean playerWhite;
+	//bialy ma nieparzyste ruchy
 	
-	public Model() 
+	public Model(boolean whitePlayer) 
 	{
-		
+		playerWhite=whitePlayer;
+		if(playerWhite)
+			circle.setFill(Color.rgb(252, 252, 252));
+		else
+			circle.setFill(Color.rgb(0, 0, 0));;
 	}
 	
 	public void turn(FieldTile ft)
 	{
 		if (ft.ifEmpty()) 
 		{
-			if (playerWhiteTurn) {
-				circle.setFill(Color.rgb(252, 252, 252));
+			
+			if (playerWhite) {
+				
 				ft.setPlayerWhite();
-				playerWhiteTurn = false;
+				//playerWhiteTurn = false;
 			} else {
-				circle.setFill(Color.rgb(0, 0, 0));
-				playerWhiteTurn = true;
+				
+				//playerWhiteTurn = true;
 			}
 
 			main.Main.gridPane.add(circle, ft.getCol(), ft.getRow());
@@ -422,7 +432,7 @@ public class Model
 	
 	boolean testForDraw()
 	{
-		if(movesNumber>=225)
+		if(playerWhite && movesNumber>=113)
 			return true;
 		else
 			return false;

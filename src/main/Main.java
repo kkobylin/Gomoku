@@ -1,6 +1,7 @@
 package main;
 
 
+import controller.Controller;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -8,13 +9,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import model.FieldTile;
+import java.net.ConnectException;
+import javax.jms.JMSException;
 
 
 public class Main extends Application 
 {
 	public static GridPane gridPane = new GridPane();
 	public static FieldTile[][] tablica= new FieldTile[15][15];
-
+	Controller controler;
 	
 	@Override
 	public void start(Stage primaryStage) 
@@ -34,13 +37,16 @@ public class Main extends Application
 				}    
 			
 			
-		        
 			primaryStage.setScene(scene);
 			primaryStage.show();
 		} catch (Exception e) 
 		{
 			e.printStackTrace();
 		}
+		
+		
+		controler = new Controller(true);
+		
 	}
 
 	public static void main(String[] args) 
