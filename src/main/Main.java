@@ -13,6 +13,8 @@ import model.FieldTile;
 public class Main extends Application 
 {
 	public static GridPane gridPane = new GridPane();
+	public static FieldTile[][] tablica= new FieldTile[15][15];
+
 	
 	@Override
 	public void start(Stage primaryStage) 
@@ -23,11 +25,11 @@ public class Main extends Application
 			gridPane.setGridLinesVisible(true);
 			gridPane.setStyle("-fx-background-color:  #FFFF99;");
 			Scene scene = new Scene(gridPane, 810, 810);
-			
 			for (int i = 0; i < 15; i++)
 				for (int j = 0; j < 15; j++) 
 				{
 					FieldTile ft = new FieldTile(i,j);
+					tablica[i][j]=ft;
 					gridPane.add(ft, i, j);
 				}    
 			
