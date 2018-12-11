@@ -11,22 +11,26 @@ public class Model
 	
 	//private static boolean playerWhiteTurn=true;
 	private static int movesNumber=0;
-	private Circle circle = new Circle(27);
+	//private Circle circle = new Circle(27);
 	Message message = new Message();
 	boolean playerWhite;
 	//bialy ma nieparzyste ruchy
 	
+	public Model()
+	{
+		playerWhite=true;
+		
+	}
+	
 	public Model(boolean whitePlayer) 
 	{
 		playerWhite=whitePlayer;
-		if(playerWhite)
-			circle.setFill(Color.rgb(252, 252, 252));
-		else
-			circle.setFill(Color.rgb(0, 0, 0));;
+
 	}
 	
 	public void turn(FieldTile ft)
 	{
+		System.out.print("turn");
 		if (ft.ifEmpty()) 
 		{
 			
@@ -39,6 +43,12 @@ public class Model
 				//playerWhiteTurn = true;
 			}
 
+			Circle circle = new Circle(27);
+			if(playerWhite)
+				circle.setFill(Color.rgb(252, 252, 252));
+			else
+				circle.setFill(Color.rgb(0, 0, 0));
+			
 			main.Main.gridPane.add(circle, ft.getCol(), ft.getRow());
 			ft.notEmpty();
 			movesNumber++;

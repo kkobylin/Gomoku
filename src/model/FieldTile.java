@@ -5,7 +5,7 @@ public class FieldTile extends Canvas
 {
 	private int row, col;
 	boolean empty;
-	private controller.Controller ctrl = new controller.Controller();
+	//private controller.Controller ctrl = new controller.Controller();
 	private boolean playerWhite;
 	
 	public FieldTile(int c, int r)
@@ -13,7 +13,7 @@ public class FieldTile extends Canvas
 		super();
 		this.setHeight(54);
 		this.setWidth(54);
-		this.setOnMouseClicked(event -> ctrl.Click(event));
+		this.setOnMouseClicked(event -> main.Main.controller.Click(event));
 		this.setVisible(true);
 		row=r;
 		col=c;

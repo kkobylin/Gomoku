@@ -17,11 +17,12 @@ public class Main extends Application
 {
 	public static GridPane gridPane = new GridPane();
 	public static FieldTile[][] tablica= new FieldTile[15][15];
-	Controller controler;
+	public static Controller controller;
 	
 	@Override
 	public void start(Stage primaryStage) 
 	{
+		controller = new Controller(true);
 		try {	
 			
 			gridPane.setPrefSize(810,810);
@@ -45,7 +46,7 @@ public class Main extends Application
 		}
 		
 		
-		controler = new Controller(true);
+		
 		
 	}
 

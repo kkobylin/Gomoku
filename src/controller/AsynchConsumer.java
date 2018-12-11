@@ -13,6 +13,7 @@ public class AsynchConsumer implements MessageListener {
 			try 
 			{
 				Controller.myTurn=true;
+				System.out.print("Otrzymalem wiadomosc");
 
 			} 
 			//catch (JMSException e) 
