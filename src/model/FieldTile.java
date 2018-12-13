@@ -12,7 +12,7 @@ public class FieldTile extends Canvas
 		super();
 		this.setHeight(54);
 		this.setWidth(54);
-		this.setOnMouseClicked(event -> main.Main.controller.Click(event));
+		this.setOnMouseClicked(event -> view.Main.controller.Click(event));
 		this.setVisible(true);
 		row=r;
 		col=c;

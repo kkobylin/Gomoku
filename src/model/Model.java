@@ -3,6 +3,7 @@ package model;
 import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import view.View;
 
 public class Model 
 {
@@ -10,6 +11,7 @@ public class Model
 	private static int movesNumber=0;
 	Message message = new Message();
 	boolean playerWhite;
+	View viewObj = new View();
 
 	public Model(boolean whitePlayer) 
 	{
@@ -29,9 +31,9 @@ public class Model
 			for(int j=0;j<15;j++)
 			{
 				//i - column j - row
-				if(!(main.Main.tablica[i][j].getEmpty()))
+				if(!(view.Main.tablica[i][j].getEmpty()))
 				{
-					if(main.Main.tablica[i][j].getPlayerWhite())
+					if(view.Main.tablica[i][j].getPlayerWhite())
 					{
 						if(actualWhite)
 						{
@@ -67,11 +69,13 @@ public class Model
 				if(whiteChain>=5)
 				{
 					message.setup("White wins!");
+					view.Main.controller.endOfGame();
 					break;
 				}
 				else if (blackChain>=5)
 				{
 					message.setup("Black wins!");
+					view.Main.controller.endOfGame();
 					break;
 				}
 					
@@ -92,9 +96,9 @@ public class Model
 		{
 			for(int j=0;j<15;j++)
 			{
-				if(!(main.Main.tablica[j][i].getEmpty()))
+				if(!(view.Main.tablica[j][i].getEmpty()))
 				{
-					if(main.Main.tablica[j][i].getPlayerWhite())
+					if(view.Main.tablica[j][i].getPlayerWhite())
 					{
 						if(actualWhite)
 						{
@@ -130,11 +134,13 @@ public class Model
 				if(whiteChain>=5)
 				{
 					message.setup("White wins!");
+					view.Main.controller.endOfGame();
 					break;
 				}
 				else if (blackChain>=5)
 				{
 					message.setup("Black wins!");
+					view.Main.controller.endOfGame();
 					break;
 				}
 					
@@ -161,9 +167,9 @@ public class Model
 			while(i>=0 && i<=14 && j>=0 && j<=14)
 			{
 				
-				if(!(main.Main.tablica[j][i].getEmpty()))
+				if(!(view.Main.tablica[j][i].getEmpty()))
 				{
-					if(main.Main.tablica[j][i].getPlayerWhite())
+					if(view.Main.tablica[j][i].getPlayerWhite())
 					{
 						if(actualWhite)
 						{
@@ -199,11 +205,13 @@ public class Model
 				if(whiteChain>=5)
 				{
 					message.setup("White wins!");
+					view.Main.controller.endOfGame();
 					break;
 				}
 				else if (blackChain>=5)
 				{
 					message.setup("Black wins!");
+					view.Main.controller.endOfGame();
 					break;
 				}
 			i++;
@@ -219,9 +227,9 @@ public class Model
 			while(i>=0 && i<=14 && j>=0 && j<=14)
 			{
 				
-				if(!(main.Main.tablica[j][i].getEmpty()))
+				if(!(view.Main.tablica[j][i].getEmpty()))
 				{
-					if(main.Main.tablica[j][i].getPlayerWhite())
+					if(view.Main.tablica[j][i].getPlayerWhite())
 					{
 						if(actualWhite)
 						{
@@ -257,11 +265,13 @@ public class Model
 				if(whiteChain>=5)
 				{
 					message.setup("White wins!");
+					view.Main.controller.endOfGame();
 					break;
 				}
 				else if (blackChain>=5)
 				{
 					message.setup("Black wins!");
+					view.Main.controller.endOfGame();
 					break;
 				}
 			i--;
@@ -277,9 +287,9 @@ public class Model
 			while(i>0 && i<=14 && j>0 && j<=14)
 			{
 				
-				if(!(main.Main.tablica[j][i].getEmpty()))
+				if(!(view.Main.tablica[j][i].getEmpty()))
 				{
-					if(main.Main.tablica[j][i].getPlayerWhite())
+					if(view.Main.tablica[j][i].getPlayerWhite())
 					{
 						if(actualWhite)
 						{
@@ -315,11 +325,13 @@ public class Model
 				if(whiteChain>=5)
 				{
 					message.setup("White wins!");
+					view.Main.controller.endOfGame();
 					break;
 				}
 				else if (blackChain>=5)
 				{
 					message.setup("Black wins!");
+					view.Main.controller.endOfGame();
 					break;
 				}
 			i--;
@@ -335,9 +347,9 @@ public class Model
 			while(i>=0 && i<14 && j>0 && j<=14)
 			{
 				
-				if(!(main.Main.tablica[j][i].getEmpty()))
+				if(!(view.Main.tablica[j][i].getEmpty()))
 				{
-					if(main.Main.tablica[j][i].getPlayerWhite())
+					if(view.Main.tablica[j][i].getPlayerWhite())
 					{
 						if(actualWhite)
 						{
@@ -373,11 +385,13 @@ public class Model
 				if(whiteChain>=5)
 				{
 					message.setup("White wins!");
+					view.Main.controller.endOfGame();
 					break;
 				}
 				else if (blackChain>=5)
 				{	
 					message.setup("Black wins!");
+					view.Main.controller.endOfGame();
 					break;
 				}
 			i++;
@@ -393,7 +407,10 @@ public class Model
 	private void testForDraw()
 	{
 		if(movesNumber>=225)
+		{
 			message.setup("It is draw!");
+			view.Main.controller.endOfGame();
+		}
 	}
 	
 	public void turn(FieldTile ft)
@@ -405,13 +422,11 @@ public class Model
 			if (playerWhite) 	
 				ft.setPlayerWhite();
 			
-			Circle circle = new Circle(27);
 			if(playerWhite)
-				circle.setFill(Color.rgb(252, 252, 252));
+				viewObj.drawWhite(ft.getCol(), ft.getRow());
 			else
-				circle.setFill(Color.rgb(0, 0, 0));
-			
-			main.Main.gridPane.add(circle, ft.getCol(), ft.getRow());
+				viewObj.drawBlack(ft.getCol(), ft.getRow());
+
 			ft.notEmpty();
 			movesNumber++;
 			testForDraw();
@@ -429,18 +444,15 @@ public class Model
 			int col = Integer.parseInt(str.substring(0, scPos));
 			int row = Integer.parseInt(str.substring(scPos + 1));
 
-			Circle circle = new Circle(27);
-
-			if (playerWhite)
-				circle.setFill(Color.rgb(0, 0, 0));
+			if(playerWhite)
+				viewObj.drawWhite(col, row);
 			else
-				circle.setFill(Color.rgb(252, 252, 252));
+				viewObj.drawBlack(col, row);
 
 			if (!playerWhite)
-				main.Main.tablica[col][row].setPlayerWhite();
+				view.Main.tablica[col][row].setPlayerWhite();
 
-			main.Main.gridPane.add(circle, col, row);
-			main.Main.tablica[col][row].notEmpty();
+			view.Main.tablica[col][row].notEmpty();
 			movesNumber++;
 			testForDraw();
 			testForWinVertically();

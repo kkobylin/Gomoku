@@ -12,7 +12,7 @@ public class AsynchConsumer implements MessageListener {
 		if (message instanceof TextMessage)
 			try {
 				Controller.model.updateBoard(((TextMessage) message).getText());
-				main.Main.controller.setMyTurn();
+				view.Main.controller.setMyTurn();
 
 			} catch (JMSException e) {
 				e.printStackTrace();

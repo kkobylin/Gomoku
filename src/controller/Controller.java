@@ -70,5 +70,11 @@ public class Controller {
     	
     		
     }
+    
+    public void endOfGame()
+    {
+    	producer.finalize();
+    	consumer.finalize();
+    }
 
 }
