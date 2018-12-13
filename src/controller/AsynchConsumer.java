@@ -10,15 +10,11 @@ public class AsynchConsumer implements MessageListener {
 	@Override
 	public void onMessage(Message message) {
 		if (message instanceof TextMessage)
-			try 
-			{
-				Controller.myTurn=true;
-				System.out.print("Otrzymalem wiadomosc");
+			try {
+				Controller.model.updateBoard(((TextMessage) message).getText());
+				main.Main.controller.setMyTurn();
 
-			} 
-			//catch (JMSException e) 
-		catch(Exception e)
-		{
+			} catch (JMSException e) {
 				e.printStackTrace();
 			}
 	}

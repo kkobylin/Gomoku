@@ -9,8 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import model.FieldTile;
-import java.net.ConnectException;
-import javax.jms.JMSException;
 
 
 public class Main extends Application 
@@ -22,6 +20,8 @@ public class Main extends Application
 	@Override
 	public void start(Stage primaryStage) 
 	{
+		//true - gracz bialy
+		//false -gracz czarny
 		controller = new Controller(true);
 		try {	
 			

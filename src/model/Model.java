@@ -1,69 +1,24 @@
 package model;
 
-import javax.jms.JMSException;
-
-import controller.Producer;
+import javafx.application.Platform;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class Model 
 {
 	
-	//private static boolean playerWhiteTurn=true;
 	private static int movesNumber=0;
-	//private Circle circle = new Circle(27);
 	Message message = new Message();
 	boolean playerWhite;
-	//bialy ma nieparzyste ruchy
-	
-	public Model()
-	{
-		playerWhite=true;
-		
-	}
-	
+
 	public Model(boolean whitePlayer) 
 	{
 		playerWhite=whitePlayer;
 
 	}
 	
-	public void turn(FieldTile ft)
-	{
-		System.out.print("turn");
-		if (ft.ifEmpty()) 
-		{
-			
-			if (playerWhite) {
-				
-				ft.setPlayerWhite();
-				//playerWhiteTurn = false;
-			} else {
-				
-				//playerWhiteTurn = true;
-			}
 
-			Circle circle = new Circle(27);
-			if(playerWhite)
-				circle.setFill(Color.rgb(252, 252, 252));
-			else
-				circle.setFill(Color.rgb(0, 0, 0));
-			
-			main.Main.gridPane.add(circle, ft.getCol(), ft.getRow());
-			ft.notEmpty();
-			movesNumber++;
-			if(testForDraw())
-			{
-				message.setup("It is draw!");
-			}
-			testForWinVertically();
-			testForWinHorizontally();
-			testForWinDiagonally();
-				
-		}
-	}
-
-	void testForWinVertically()
+	private void testForWinVertically()
 	{
 		int whiteChain=0;
 		int blackChain=0;
@@ -73,10 +28,10 @@ public class Model
 		{
 			for(int j=0;j<15;j++)
 			{
-				//kolumna potem wiersz
-				if(!(main.Main.tablica[i][j].ifEmpty()))
+				//i - column j - row
+				if(!(main.Main.tablica[i][j].getEmpty()))
 				{
-					if(main.Main.tablica[i][j].ifPlayerWhite())
+					if(main.Main.tablica[i][j].getPlayerWhite())
 					{
 						if(actualWhite)
 						{
@@ -111,13 +66,11 @@ public class Model
 				}
 				if(whiteChain>=5)
 				{
-					System.out.println("White win");
 					message.setup("White wins!");
 					break;
 				}
 				else if (blackChain>=5)
 				{
-					System.out.println("Black win");
 					message.setup("Black wins!");
 					break;
 				}
@@ -139,10 +92,9 @@ public class Model
 		{
 			for(int j=0;j<15;j++)
 			{
-				//kolumna potem wiersz
-				if(!(main.Main.tablica[j][i].ifEmpty()))
+				if(!(main.Main.tablica[j][i].getEmpty()))
 				{
-					if(main.Main.tablica[j][i].ifPlayerWhite())
+					if(main.Main.tablica[j][i].getPlayerWhite())
 					{
 						if(actualWhite)
 						{
@@ -177,13 +129,11 @@ public class Model
 				}
 				if(whiteChain>=5)
 				{
-					System.out.println("White win");
 					message.setup("White wins!");
 					break;
 				}
 				else if (blackChain>=5)
 				{
-					System.out.println("Black win");	
 					message.setup("Black wins!");
 					break;
 				}
@@ -194,13 +144,13 @@ public class Model
 		}
 	}
 	
-	void testForWinDiagonally()
+	private void testForWinDiagonally()
 	{
 		int whiteChain=0;
 		int blackChain=0;
 		boolean actualWhite=true;
 		
-		//i - row
+		//i - row, j - column
 		
 		for(int k=10;k>=0;k--)
 		{
@@ -211,9 +161,9 @@ public class Model
 			while(i>=0 && i<=14 && j>=0 && j<=14)
 			{
 				
-				if(!(main.Main.tablica[j][i].ifEmpty()))
+				if(!(main.Main.tablica[j][i].getEmpty()))
 				{
-					if(main.Main.tablica[j][i].ifPlayerWhite())
+					if(main.Main.tablica[j][i].getPlayerWhite())
 					{
 						if(actualWhite)
 						{
@@ -269,9 +219,9 @@ public class Model
 			while(i>=0 && i<=14 && j>=0 && j<=14)
 			{
 				
-				if(!(main.Main.tablica[j][i].ifEmpty()))
+				if(!(main.Main.tablica[j][i].getEmpty()))
 				{
-					if(main.Main.tablica[j][i].ifPlayerWhite())
+					if(main.Main.tablica[j][i].getPlayerWhite())
 					{
 						if(actualWhite)
 						{
@@ -327,9 +277,9 @@ public class Model
 			while(i>0 && i<=14 && j>0 && j<=14)
 			{
 				
-				if(!(main.Main.tablica[j][i].ifEmpty()))
+				if(!(main.Main.tablica[j][i].getEmpty()))
 				{
-					if(main.Main.tablica[j][i].ifPlayerWhite())
+					if(main.Main.tablica[j][i].getPlayerWhite())
 					{
 						if(actualWhite)
 						{
@@ -385,9 +335,9 @@ public class Model
 			while(i>=0 && i<14 && j>0 && j<=14)
 			{
 				
-				if(!(main.Main.tablica[j][i].ifEmpty()))
+				if(!(main.Main.tablica[j][i].getEmpty()))
 				{
-					if(main.Main.tablica[j][i].ifPlayerWhite())
+					if(main.Main.tablica[j][i].getPlayerWhite())
 					{
 						if(actualWhite)
 						{
@@ -440,16 +390,65 @@ public class Model
 	}
 	
 	
-	boolean testForDraw()
+	private void testForDraw()
 	{
-		if(playerWhite && movesNumber>=113)
-			return true;
-		else
-			return false;
+		if(movesNumber>=225)
+			message.setup("It is draw!");
 	}
 	
-	void restart()
+	public void turn(FieldTile ft)
 	{
+
+		if (ft.getEmpty()) 
+		{
+			
+			if (playerWhite) 	
+				ft.setPlayerWhite();
+			
+			Circle circle = new Circle(27);
+			if(playerWhite)
+				circle.setFill(Color.rgb(252, 252, 252));
+			else
+				circle.setFill(Color.rgb(0, 0, 0));
+			
+			main.Main.gridPane.add(circle, ft.getCol(), ft.getRow());
+			ft.notEmpty();
+			movesNumber++;
+			testForDraw();
+			testForWinVertically();
+			testForWinHorizontally();
+			testForWinDiagonally();
+				
+		}
+	}
+	
+	public void updateBoard(String str)
+	{
+		Platform.runLater(() -> {
+			int scPos = str.indexOf(";");
+			int col = Integer.parseInt(str.substring(0, scPos));
+			int row = Integer.parseInt(str.substring(scPos + 1));
+
+			Circle circle = new Circle(27);
+
+			if (playerWhite)
+				circle.setFill(Color.rgb(0, 0, 0));
+			else
+				circle.setFill(Color.rgb(252, 252, 252));
+
+			if (!playerWhite)
+				main.Main.tablica[col][row].setPlayerWhite();
+
+			main.Main.gridPane.add(circle, col, row);
+			main.Main.tablica[col][row].notEmpty();
+			movesNumber++;
+			testForDraw();
+			testForWinVertically();
+			testForWinHorizontally();
+			testForWinDiagonally();
+		});
+		
 		
 	}
+	
 }

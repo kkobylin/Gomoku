@@ -5,7 +5,6 @@ public class FieldTile extends Canvas
 {
 	private int row, col;
 	boolean empty;
-	//private controller.Controller ctrl = new controller.Controller();
 	private boolean playerWhite;
 	
 	public FieldTile(int c, int r)
@@ -31,7 +30,7 @@ public class FieldTile extends Canvas
 		return col;
 	}
 	
-	public boolean ifEmpty()
+	public boolean getEmpty()
 	{
 		return empty;
 	}
@@ -46,7 +45,7 @@ public class FieldTile extends Canvas
 		playerWhite=true;
 	}
 	
-	public boolean ifPlayerWhite()
+	public boolean getPlayerWhite()
 	{
 		return playerWhite;
 	}
