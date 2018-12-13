@@ -1,8 +1,6 @@
 package model;
 
 import javafx.application.Platform;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import view.View;
 
 public class Model 
@@ -444,7 +442,7 @@ public class Model
 			int col = Integer.parseInt(str.substring(0, scPos));
 			int row = Integer.parseInt(str.substring(scPos + 1));
 
-			if(playerWhite)
+			if(!playerWhite)
 				viewObj.drawWhite(col, row);
 			else
 				viewObj.drawBlack(col, row);
