@@ -2,11 +2,13 @@ package controller;
 
 import javax.jms.JMSException;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import model.FieldTile;
 import model.Message;
 import model.Model;
+import view.View;
 
 public class Controller {
 	
@@ -15,6 +17,8 @@ public class Controller {
 	Consumer consumer;
 	Message alert = new Message();
 	static boolean myTurn;
+	FieldTile lastFt=null;
+	View viewObj= new View();
 	
 
 	public Controller(boolean whitePlayer) 
@@ -51,6 +55,10 @@ public class Controller {
 	public void setMyTurn()
 	{
 		myTurn=true;
+		Platform.runLater(() ->
+		{
+		viewObj.drawRec(lastFt.getCol(), lastFt.getRow());
+		});
 	}
     
     
@@ -60,12 +68,18 @@ public class Controller {
     	
     		if(myTurn)
     		{
-    			model.turn((FieldTile)event.getSource());
+    			if(lastFt!=null)
+    			{
+    				viewObj.removeRec();
+    			}
     			myTurn=false;
+    			
     			String text = String.valueOf(((FieldTile)event.getSource()).getCol());
     			text+=";";
     			text+=String.valueOf(((FieldTile)event.getSource()).getRow());
     			producer.sendQueueMessage(text);
+    			lastFt=view.Main.tablica[((FieldTile)event.getSource()).getCol()][((FieldTile)event.getSource()).getRow()];  			
+    			model.turn((FieldTile)event.getSource());
     		}
     	
     		

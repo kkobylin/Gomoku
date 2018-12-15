@@ -18,4 +18,11 @@ public class Message
 		alert.setContentText(messageContent);
 		alert.showAndWait();
 	}
+	
+	public void startGame(String messageContent)
+	{
+		alert.setTitle("Start of the Game");
+		alert.setContentText(messageContent);
+		alert.showAndWait();
+	}
 }
