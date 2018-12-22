@@ -1,0 +1,7 @@
+W celu uruchomienia gry w pliku main na jednej instancji zmienną playerWhite należy ustawić jako true dla gracza białego, a na drugiej jako false dla gracza czarnego. Po odpaleniu gry i pojawieniu się planszy pojawią się odpowiednie komunikaty dla obu graczy których z nich zaczyna. W dalszej cześci gry tura danego gracza pokazywana jest przez czerwony kwadracik na ostatnim położonym kamieniu.
+
+Zasady gry:
+Gra rozgrywana na planszy 15x15 pól.
+Każdy z dwóch graczy ma do dyspozycji kamienie: jeden koloru białego, drugi -- czarnego, które układają na przemian na wolnych polach planszy.
+Celem gry jest ułożenie na planszy pięciu lub więcej kamieni swojego koloru w ciągłej linii -- poziomej, pionowej lub ukośnej. 
+Gracz, który tego dokona, zostaje zwycięzcą; jeśli nie uda się to nikomu (plansza zostanie zapełniona), następuje remis.
