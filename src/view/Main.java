@@ -22,15 +22,10 @@ public class Main extends Application
 	{
 		
 		try {	
-
-			//Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));		
-			//Scene scene = new Scene(root, 810, 810);
 			
 			ViewLoader<AnchorPane, Controller> viewLoader = new ViewLoader<AnchorPane, Controller>("Main.fxml");
 			AnchorPane anchorPane = viewLoader.getLayout();
 			controller = viewLoader.getController();
-			//controller.setWhitePlayer(playerWhite);
-			//controller.initialize();
 			Scene scene = new Scene(anchorPane, 810, 810);
 			
 			
