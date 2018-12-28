@@ -1,45 +1,37 @@
 package view;
 
 
-import controller.Controller;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
-import model.FieldTile;
+import javafx.scene.layout.AnchorPane;
 import model.Message;
 
 
 public class Main extends Application 
 {
-	public static GridPane gridPane = new GridPane();
-	public static FieldTile[][] tablica= new FieldTile[15][15];
+	//true - player White
+	//false - player Black
+	static private Boolean playerWhite=true;
+	private Message mes = new Message();
 	public static Controller controller;
-	Message mes = new Message();
-	Boolean playerWhite;
+	
 	
 	@Override
 	public void start(Stage primaryStage) 
 	{
-		//true - player White
-		//false - player Black
-		playerWhite=true;
-		controller = new Controller(playerWhite);
+		
 		try {	
+
+			//Parent root = FXMLLoader.load(getClass().getResource("Main.fxml"));		
+			//Scene scene = new Scene(root, 810, 810);
 			
-			gridPane.setPrefSize(810,810);
-			gridPane.setGridLinesVisible(true);
-			gridPane.setStyle("-fx-background-color:  #FFFF99;");
-			Scene scene = new Scene(gridPane, 810, 810);
-			for (int i = 0; i < 15; i++)
-				for (int j = 0; j < 15; j++) 
-				{
-					FieldTile ft = new FieldTile(i,j);
-					tablica[i][j]=ft;
-					gridPane.add(ft, i, j);
-				}    
+			ViewLoader<AnchorPane, Controller> viewLoader = new ViewLoader<AnchorPane, Controller>("Main.fxml");
+			AnchorPane anchorPane = viewLoader.getLayout();
+			controller = viewLoader.getController();
+			//controller.setWhitePlayer(playerWhite);
+			//controller.initialize();
+			Scene scene = new Scene(anchorPane, 810, 810);
 			
 			
 			primaryStage.setScene(scene);
@@ -73,6 +65,11 @@ public class Main extends Application
 
 	public static void main(String[] args) 
 	{ launch(args); }
+	
+	static public boolean getPlayer()
+	{
+		return playerWhite;
+	}
 }
 
 

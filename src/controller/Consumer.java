@@ -19,7 +19,7 @@ public class Consumer {
 	
 	
 
-	Consumer(String url, String queueName) throws JMSException {
+	public Consumer(String url, String queueName) throws JMSException {
 		ConnectionFactory connectionFactory = new com.sun.messaging.ConnectionFactory();
 		jmsContext = connectionFactory.createContext();
 // 7676 numer portu, na którym JMS Service nas³uchuje po³¹czeñ
@@ -37,7 +37,7 @@ public class Consumer {
 		return null;
 	}
 
-	protected void finalize() {
+	public void finalize() {
 		if (jmsConsumer != null)
 			jmsConsumer.close();
 		if (jmsContext != null)

@@ -29,7 +29,7 @@ public class Producer {
 		jmsProducer.send(queue, msg);
 	}
 
-	protected void finalize() {
+	public void finalize() {
 		if (jmsContext != null)
 			jmsContext.close();
 	}

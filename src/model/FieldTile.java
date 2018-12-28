@@ -4,7 +4,7 @@ import javafx.scene.canvas.Canvas;
 public class FieldTile extends Canvas
 {
 	private int row, col;
-	boolean empty;
+	private boolean empty;
 	private boolean playerWhite;
 	
 	public FieldTile(int c, int r)
@@ -12,7 +12,6 @@ public class FieldTile extends Canvas
 		super();
 		this.setHeight(54);
 		this.setWidth(54);
-		this.setOnMouseClicked(event -> view.Main.controller.Click(event));
 		this.setVisible(true);
 		row=r;
 		col=c;

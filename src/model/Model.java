@@ -1,15 +1,14 @@
 package model;
 
 import javafx.application.Platform;
-import view.View;
+import view.Controller;
 
 public class Model 
 {
 	
 	private static int movesNumber=0;
-	Message message = new Message();
-	boolean playerWhite;
-	View viewObj = new View();
+	private Message message = new Message();
+	private boolean playerWhite;
 
 	public Model(boolean whitePlayer) 
 	{
@@ -29,9 +28,9 @@ public class Model
 			for(int j=0;j<15;j++)
 			{
 				//i - column j - row
-				if(!(view.Main.tablica[i][j].getEmpty()))
+				if(!(view.Controller.tablica[i][j].getEmpty()))
 				{
-					if(view.Main.tablica[i][j].getPlayerWhite())
+					if(view.Controller.tablica[i][j].getPlayerWhite())
 					{
 						if(actualWhite)
 						{
@@ -94,9 +93,9 @@ public class Model
 		{
 			for(int j=0;j<15;j++)
 			{
-				if(!(view.Main.tablica[j][i].getEmpty()))
+				if(!(view.Controller.tablica[j][i].getEmpty()))
 				{
-					if(view.Main.tablica[j][i].getPlayerWhite())
+					if(view.Controller.tablica[j][i].getPlayerWhite())
 					{
 						if(actualWhite)
 						{
@@ -165,9 +164,9 @@ public class Model
 			while(i>=0 && i<=14 && j>=0 && j<=14)
 			{
 				
-				if(!(view.Main.tablica[j][i].getEmpty()))
+				if(!(view.Controller.tablica[j][i].getEmpty()))
 				{
-					if(view.Main.tablica[j][i].getPlayerWhite())
+					if(view.Controller.tablica[j][i].getPlayerWhite())
 					{
 						if(actualWhite)
 						{
@@ -225,9 +224,9 @@ public class Model
 			while(i>=0 && i<=14 && j>=0 && j<=14)
 			{
 				
-				if(!(view.Main.tablica[j][i].getEmpty()))
+				if(!(view.Controller.tablica[j][i].getEmpty()))
 				{
-					if(view.Main.tablica[j][i].getPlayerWhite())
+					if(view.Controller.tablica[j][i].getPlayerWhite())
 					{
 						if(actualWhite)
 						{
@@ -285,9 +284,9 @@ public class Model
 			while(i>0 && i<=14 && j>0 && j<=14)
 			{
 				
-				if(!(view.Main.tablica[j][i].getEmpty()))
+				if(!(view.Controller.tablica[j][i].getEmpty()))
 				{
-					if(view.Main.tablica[j][i].getPlayerWhite())
+					if(view.Controller.tablica[j][i].getPlayerWhite())
 					{
 						if(actualWhite)
 						{
@@ -345,9 +344,9 @@ public class Model
 			while(i>=0 && i<14 && j>0 && j<=14)
 			{
 				
-				if(!(view.Main.tablica[j][i].getEmpty()))
+				if(!(view.Controller.tablica[j][i].getEmpty()))
 				{
-					if(view.Main.tablica[j][i].getPlayerWhite())
+					if(view.Controller.tablica[j][i].getPlayerWhite())
 					{
 						if(actualWhite)
 						{
@@ -411,6 +410,7 @@ public class Model
 		}
 	}
 	
+	
 	public void turn(FieldTile ft)
 	{
 
@@ -421,9 +421,9 @@ public class Model
 				ft.setPlayerWhite();
 			
 			if(playerWhite)
-				viewObj.drawWhite(ft.getCol(), ft.getRow());
+				view.Main.controller.drawWhite(ft.getCol(), ft.getRow());
 			else
-				viewObj.drawBlack(ft.getCol(), ft.getRow());
+				view.Main.controller.drawBlack(ft.getCol(), ft.getRow());
 
 			ft.notEmpty();
 			movesNumber++;
@@ -443,14 +443,14 @@ public class Model
 			int row = Integer.parseInt(str.substring(scPos + 1));
 
 			if(!playerWhite)
-				viewObj.drawWhite(col, row);
+				view.Main.controller.drawWhite(col, row);
 			else
-				viewObj.drawBlack(col, row);
+				view.Main.controller.drawBlack(col, row);
 
 			if (!playerWhite)
-				view.Main.tablica[col][row].setPlayerWhite();
+				Controller.tablica[col][row].setPlayerWhite();
 
-			view.Main.tablica[col][row].notEmpty();
+			Controller.tablica[col][row].notEmpty();
 			movesNumber++;
 			testForDraw();
 			testForWinVertically();
