@@ -12,7 +12,7 @@ by asynchronous messages and JMS Queue via Glassfish server. Project is based on
 ## Setup
 To run the game firstly on one instance of Eclipse in Main file, "playerWhite" variable should be set as True
 ,on the second (for example in another workspace) should be set as False. After launching the game, appropriate
-communicates will tell which player start the game. After two first moves, red rectangle on the last stone
+message will tell which player start the game. After two first moves, red rectangle on the last stone
 will show whose turn is now.
 
 ### Rules
