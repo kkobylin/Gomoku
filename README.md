@@ -20,4 +20,3 @@ Game is being played on 15x15 board.
 White plays first, and players alternate in placing a stone of their color on an empty intersection.
 The winner is the first player to get an unbroken row of five stones horizontally, vertically, 
 or diagonally. In situation when board is full there is a draw.
-
